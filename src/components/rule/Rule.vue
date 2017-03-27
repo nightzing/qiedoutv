@@ -190,6 +190,7 @@
                     }
 					console.log(ruleID);
 					searchRuleByRuleID(param).then(function (res){
+						console.log("jk");
 						console.log(res);
 						this.rules = res.data
 					}.bind(this)).catch(function (err){

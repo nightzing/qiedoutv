@@ -1,4 +1,5 @@
 import Home from './components/Home.vue'
+import Index from './components/index/Index.vue'
 import Model from './components/model/Model.vue'
 import Rule from './components/rule/Rule.vue'
 import Vari from './components/vari/Vari.vue'
@@ -9,6 +10,12 @@ const routes = [
         component: Home,
         name: '',
         children: [
+            {
+                path: '/index',
+                component: Index,
+                name: 'Index',
+                hidden: true
+            },
             {
                 path: '/model',
                 component: Model,

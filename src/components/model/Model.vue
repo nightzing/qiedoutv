@@ -220,6 +220,7 @@
             getModels(){
                 let self = this
                 getModels({}).then(function (response) {
+                  console.log("ml");
                     console.log(response);
                     self.models = response.data
                 }).catch(function (error) {
