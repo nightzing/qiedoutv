@@ -1,5 +1,18 @@
 <template>
     <div >
+        <el-row>
+          <el-col :span="8">
+            <div class="grid-content bg-purple">
+                  <el-card class="box-card" style="height:80px;">
+                    <img src="http://www.51gpc.com/Public/img/logo-new.png" class="image">
+                    <div style="padding: 14px;">
+                            <span>好吃的汉堡</span>
+                    </div>
+                  </el-card>
+            </div>
+          </el-col>
+          <el-col :span="16"><div class="grid-content bg-purple-light">拍片咨询：40000</div></el-col>
+        </el-row>
         <el-menu theme="dark" default-active="1" class="el-menu-demo" router mode="horizontal" @select="handleSelect">
         <el-menu-item class="is-active" default-active="index" default-openeds="index" index="index">首页</el-menu-item>
         <el-menu-item index="model" v-popover:popover1>制作流程
@@ -60,6 +73,35 @@
 </script>
 
 <style scoped>
+.el-row {
+    margin-bottom: 20px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .el-col {
+    border-radius: 4px;
+  }
+  .bg-purple-dark {
+    background: #99a9bf;
+  }
+  .bg-purple {
+    background: #d3dce6;
+  }
+  .bg-purple-light {
+    background: #e5e9f2;
+    text-align: right;
+    line-height: 80px;
+    padding:0 20px;
+  }
+  .grid-content {
+    border-radius: 4px;
+    min-height: 90px;
+  }
+  .row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
+  }
    .content {
         background-color: aliceblue;
     }

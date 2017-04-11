@@ -5,7 +5,17 @@
          <h3>{{ item }}</h3>
        </el-carousel-item>
     </el-carousel>
-   <video-player  ref="videoPlayer" style="width:30%;" :options="playerOptions"></video-player>
+    <el-row>
+      <el-col :span="6" v-for="(o, index) in 3" :offset="index > 0 ? 2 : 0">
+        <el-card :body-style="{ padding: '0px' }">
+        <video-player  ref="videoPlayer" style="width:100%;" :options="playerOptions"></video-player>
+          <div style="padding: 14px;">
+            <div class="bottom clearfix">
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
  </div>
 </template>
 <script>
