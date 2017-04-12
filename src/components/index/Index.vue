@@ -5,16 +5,21 @@
          <h3>{{ item }}</h3>
        </el-carousel-item>
     </el-carousel>
-    <el-row>
-      <el-col :span="6" v-for="(o, index) in 3" :offset="index > 0 ? 2 : 0">
-        <el-card :body-style="{ padding: '0px' }">
-        <video-player  ref="videoPlayer" style="width:100%;" :options="playerOptions"></video-player>
-          <div style="padding: 14px;">
-            <div class="bottom clearfix">
-            </div>
-          </div>
-        </el-card>
-      </el-col>
+     <el-row>
+              <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
+     </el-row>
+    <el-row type="flex" class="row-bg" justify="space-around">
+         <el-col :xs="22" :sm="20" :md="10" :lg="6" v-for="(o, index) in 3" :offset="index > 0 ? 3 : 0">
+             <el-card :body-style="{ padding: '0px' }">
+                 <img src="http://www.51gpc.com/Public/img/logo-new.png" class="image"  @click="openVideo = true">
+                 <el-dialog title="收货地址" v-model="openVideo" @close="onPlayerPause">
+                     <video-player  ref="videoPlayer" style="width:100%;" :options="playerOptions"  @pause="onPlayerPause($event)"></video-player>
+                 </el-dialog>
+                 <div style="padding: 14px;">
+                     <div class="bottom clearfix"></div>
+                 </div>
+             </el-card>
+         </el-col>
     </el-row>
  </div>
 </template>
@@ -26,6 +31,7 @@
         data (){
             return {
                  list:[],
+                 openVideo : false,
               playerOptions: {
                         // component options
                         start: 0,
@@ -33,6 +39,7 @@
                         // videojs options
                         muted: true,
                         language: 'en',
+                        autoplay: true,
                         playbackRates: [0.7, 1.0, 1.5, 2.0],
                         sources: [{
                           type: "video/mp4",
@@ -47,7 +54,7 @@
                 console.log(key, keyPath);
             },
             getData(){
-                let self = this
+                let self = this;
                getData({}).then(function (response) {
                   console.log("ml");
                     console.log(response);
@@ -57,12 +64,24 @@
                 }).catch(function (error) {
                     console.log(error);
                 })
-            }
+            },
+           onPlayerPlay(player) {
+                 alert('player play!', player)
+            },
+            onPlayerPause(player) {
+              alert('player pause!', player)
+                   player.pause();
+            },
         },
         mounted() {
             console.log("mounted")
             this.getData();
-        }
+        },
+        computed: {
+              player() {
+                return this.$refs.videoPlayer.player
+              }
+        },
     }
 </script>
 
@@ -89,4 +108,31 @@
       .el-carousel__item:nth-child(2n+1) {
         background-color: #d3dce6;
       }
+
+     .el-row {
+         margin-bottom: 20px;
+         &:last-child {
+           margin-bottom: 0;
+         }
+       }
+       .el-col {
+         border-radius: 4px;
+       }
+       .bg-purple-dark {
+         background: #99a9bf;
+       }
+       .bg-purple {
+         background: #d3dce6;
+       }
+       .bg-purple-light {
+         background: #e5e9f2;
+       }
+       .grid-content {
+         border-radius: 4px;
+         min-height: 36px;
+       }
+       .row-bg {
+         padding: 10px 0;
+         background-color: #f9fafc;
+       }
 </style>
