@@ -2,6 +2,18 @@
  * Created by xbkaishui on 17/2/16.
  */
 
+const imgSrc = [
+    {
+       "src":"http://www.51gpc.com/uploads/2016-12-26/5860d01f80d22.jpg"
+    },
+    {
+        "src":"http://www.51gpc.com/uploads/2016-12-26/5860d029c01f1.jpg"
+    },
+    {
+        "src":"http://www.51gpc.com/uploads/2016-12-26/5860d03ac70d7.jpg"
+    }
+]
+
 const models = [
     {
         "id": 1,
@@ -98,4 +110,4 @@ const rules =[
     }
 ]
 
-export  {models, rules, varis}
+export  {imgSrc,models, rules, varis}

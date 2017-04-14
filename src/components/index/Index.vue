@@ -1,8 +1,9 @@
 <template>
  <div >
  	<el-carousel :interval="4000" type="card" height="200px">
-       <el-carousel-item v-for="item in list">
-         <h3>{{ item }}</h3>
+       <el-carousel-item v-for="item in  carouselImgList">
+        <img v-bind:src = item.src></img>
+         <h3></h3>
        </el-carousel-item>
     </el-carousel>
      <el-row>
@@ -12,8 +13,8 @@
          <el-col :xs="22" :sm="20" :md="10" :lg="6" v-for="(o, index) in 3" :offset="index > 0 ? 3 : 0">
              <el-card :body-style="{ padding: '0px' }">
                  <img src="http://www.51gpc.com/Public/img/logo-new.png" class="image"  @click="openVideo = true">
-                 <el-dialog title="收货地址" v-model="openVideo" @close="onPlayerPause">
-                     <video-player  ref="videoPlayer" style="width:100%;" :options="playerOptions"  @pause="onPlayerPause($event)"></video-player>
+                 <el-dialog title="收货地址" v-model="openVideo" @close="playerReadied">
+                     <video-player  ref="videoPlayer" style="width:100%;" :options="playerOptions"  @pause="onPlayerPlay"  @ready="playerReadied"></video-player>
                  </el-dialog>
                  <div style="padding: 14px;">
                      <div class="bottom clearfix"></div>
@@ -25,12 +26,12 @@
 </template>
 <script>
  import VideoPlayer from 'vue-video-player'
-  import {getData} from '../../api/api';
+  import {getData,getUrl} from '../../api/api';
  
     export default{
         data (){
             return {
-                 list:[],
+                 carouselImgList:[],
                  openVideo : false,
               playerOptions: {
                         // component options
@@ -53,13 +54,14 @@
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
             },
-            getData(){
-                let self = this;
-               getData({}).then(function (response) {
+            getCarousel(){
+                let that = this;
+               getUrl({}).then(function (response) {
                   console.log("ml");
                     console.log(response);
-                    self.list = response.data.tags;
-                     console.log(self.list);
+                    let data = response.data;
+                      that.carouselImgList = data.img;
+                      console.log(data.img);
 
                 }).catch(function (error) {
                     console.log(error);
@@ -69,13 +71,17 @@
                  alert('player play!', player)
             },
             onPlayerPause(player) {
-              alert('player pause!', player)
+
                    player.pause();
+            },
+            playerReadied(player) {
+
+                 player.pause();
             },
         },
         mounted() {
             console.log("mounted")
-            this.getData();
+            this.getCarousel();
         },
         computed: {
               player() {

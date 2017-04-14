@@ -4,6 +4,7 @@ import axios from 'axios'
 
 export const getData = params => { return axios.get(`https://api.douban.com/v2/book/1220562`, { params: params }); };
 
+export const getUrl = params => { return axios.get(`../static/mock/data.json`, { params: params }); };
 
 
 

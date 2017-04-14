@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server -d --inline --hot --env.dev",
-    "build": "rimraf dist && webpack -p --progress --hide-modules"
+    "build": "rimraf dist && webpack -p --progress --hide-modules",
+    "mock": "json-server --watch mock/db.json",
+    "mockdev": "npm run mock & npm run dev"
   },
   "dependencies": {
     "element-ui": "^1.1.2",
