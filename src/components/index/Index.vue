@@ -1,15 +1,33 @@
 <template>
  <div >
- 	<el-carousel :interval="4000" type="card" height="200px">
-       <el-carousel-item v-for="item in  carouselImgList">
-        <img v-bind:src = item.src></img>
+ 	 <el-carousel :interval="4000" type="card" height="200px">
+       <el-carousel-item v-for="item in carouselImgList">
+        <img :src = item.src></img>
          <h3></h3>
        </el-carousel-item>
-    </el-carousel>
+     </el-carousel>
+     <!-- 视频模块 -->
      <el-row>
-              <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
+         <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
      </el-row>
-    <el-row type="flex" class="row-bg" justify="space-around">
+     <el-row type="flex" class="row-bg" justify="space-around">
+         <el-col :xs="12" :sm="20" :md="10" :lg="6" v-for="(o, index) in 3" :offset="index > 0 ? 3 : 0">
+             <el-card :body-style="{ padding: '0px' }" >
+                 <img src="http://www.51gpc.com/Public/img/logo-new.png" class="image"  @click="openVideo = true">
+                 <el-dialog title="收货地址" v-model="openVideo" @close="playerReadied">
+                     <video-player  ref="videoPlayer" style="width:100%;" :options="playerOptions"  @pause="onPlayerPlay"  @ready="playerReadied"></video-player>
+                 </el-dialog>
+                 <div style="padding: 14px;">
+                     <div class="bottom clearfix"></div>
+                 </div>
+             </el-card>
+         </el-col>
+     </el-row>
+
+     <el-row>
+         <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
+     </el-row>
+     <el-row type="flex" class="row-bg" justify="space-around">
          <el-col :xs="22" :sm="20" :md="10" :lg="6" v-for="(o, index) in 3" :offset="index > 0 ? 3 : 0">
              <el-card :body-style="{ padding: '0px' }">
                  <img src="http://www.51gpc.com/Public/img/logo-new.png" class="image"  @click="openVideo = true">
@@ -22,6 +40,21 @@
              </el-card>
          </el-col>
     </el-row>
+     <!-- 新闻模块   -->
+     <el-row>
+         <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
+     </el-row>
+     <el-row>
+         <el-breadcrumb separator="/">
+             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+         </el-breadcrumb>
+         <el-breadcrumb separator="/">
+             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+         </el-breadcrumb>
+         <el-breadcrumb separator="/">
+             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+         </el-breadcrumb>
+     </el-row>
  </div>
 </template>
 <script>
@@ -33,7 +66,7 @@
             return {
                  carouselImgList:[],
                  openVideo : false,
-              playerOptions: {
+                 playerOptions: {
                         // component options
                         start: 0,
                         playsinline: false,
@@ -47,10 +80,10 @@
                           src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm"
                         }],
                         poster: "https://surmon-china.github.io/vue-video-player/static/images/author.jpg",
-                      }
+                  }
             };
         },
-         methods: {
+        methods: {
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
             },
@@ -68,14 +101,12 @@
                 })
             },
            onPlayerPlay(player) {
-                 alert('player play!', player)
+                  console.log('player play!', player)
             },
             onPlayerPause(player) {
-
-                   player.pause();
+                 player.pause();
             },
             playerReadied(player) {
-
                  player.pause();
             },
         },
@@ -141,4 +172,6 @@
          padding: 10px 0;
          background-color: #f9fafc;
        }
+       .el-breadcrumb{padding:5px;text-align:center;}
+
 </style>

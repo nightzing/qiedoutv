@@ -32,7 +32,16 @@ const routes = [
                 component: Vari,
                 name: '',
                 hidden: false
-            }
+            },
+             {
+                path: '/', 
+                redirect: { 
+                	path: '/index',
+	                component: Index,
+	                name: 'Index',
+	                hidden: true
+                }
+            },
         ]
     }
 ]

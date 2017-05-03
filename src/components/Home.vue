@@ -14,7 +14,7 @@
           <el-col :span="16"><div class="grid-content bg-purple-light">拍片咨询：40000</div></el-col>
         </el-row>
         <el-menu theme="dark" default-active="1" class="el-menu-demo" router mode="horizontal" @select="handleSelect">
-        <el-menu-item class="is-active" default-active="index" default-openeds="index" index="index">首页</el-menu-item>
+        <el-menu-item class="" default-active="" default-openeds="" index="index">首页</el-menu-item>
         <el-menu-item index="model" v-popover:popover1>制作流程
                 <el-popover
                   ref="popover1"
@@ -26,8 +26,8 @@
                 </el-popover>
         </el-menu-item>
             <el-menu-item index="rule">作品类型</el-menu-item>
-            <el-menu-item index="rule">关于我们</el-menu-item>
-            <el-menu-item index="rule">加入茄豆</el-menu-item>
+        <!--     <el-menu-item index="rule">关于我们</el-menu-item>
+            <el-menu-item index="rule">加入茄豆</el-menu-item> -->
 
             <!-- <el-menu-item index="model">模型管理</el-menu-item>
             <el-menu-item index="rule">规则管理</el-menu-item>
