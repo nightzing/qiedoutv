@@ -1,8 +1,8 @@
 import Home from './components/Home.vue'
 import Index from './components/index/Index.vue'
-import Model from './components/model/Model.vue'
-import Rule from './components/rule/Rule.vue'
-import Vari from './components/vari/Vari.vue'
+import Process from './components/process/Process.vue'
+import Type from './components/type/Type.vue'
+import About from './components/about/About.vue'
 
 const routes = [
     {
@@ -17,19 +17,19 @@ const routes = [
                 hidden: true
             },
             {
-                path: '/model',
-                component: Model,
-                name: 'MODEL',
+                path: '/process',
+                component: Process,
+                name: '',
                 hidden: true
             }, {
-                path: '/rule',
-                component: Rule,
+                path: '/type',
+                component: Type,
                 name: '',
                 hidden: true
             }
             , {
-                path: '/vari',
-                component: Vari,
+                path: '/about',
+                component: About,
                 name: '',
                 hidden: false
             },

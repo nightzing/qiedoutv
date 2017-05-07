@@ -1,47 +1,46 @@
 <template>
  <div >
- 	 <el-carousel :interval="4000" type="card" height="200px">
-       <el-carousel-item v-for="item in carouselImgList">
-        <img :src = item.src></img>
-         <h3></h3>
-       </el-carousel-item>
-     </el-carousel>
+   <Swiper></Swiper>
      <!-- 视频模块 -->
-     <el-row>
-         <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
-     </el-row>
-     <el-row type="flex" class="row-bg" justify="space-around">
-         <el-col :xs="12" :sm="20" :md="10" :lg="6" v-for="(o, index) in 3" :offset="index > 0 ? 3 : 0">
-             <el-card :body-style="{ padding: '0px' }" >
-                 <img src="http://www.51gpc.com/Public/img/logo-new.png" class="image"  @click="openVideo = true">
-                 <el-dialog title="收货地址" v-model="openVideo" @close="playerReadied">
-                     <video-player  ref="videoPlayer" style="width:100%;" :options="playerOptions"  @pause="onPlayerPlay"  @ready="playerReadied"></video-player>
-                 </el-dialog>
-                 <div style="padding: 14px;">
-                     <div class="bottom clearfix"></div>
-                 </div>
-             </el-card>
-         </el-col>
-     </el-row>
+    <div class="video-list">
+      <el-row>
+           <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
+       </el-row>
+       <el-row type="flex" class="row-bg" justify="space-around">
+           <el-col :xs="12" :sm="20" :md="10" :lg="6" v-for="(o, index) in 3" :offset="index > 0 ? 3 : 0">
+               <el-card :body-style="{ padding: '0px' }" >
+                   <img src="http://www.51gpc.com/Public/img/logo-new.png" class="image"  @click="openVideo = true">
+                   <el-dialog title="收货地址" v-model="openVideo" @close="playerReadied">
+                       <video-player  ref="videoPlayer" style="width:100%;" :options="playerOptions"  @pause="onPlayerPlay"  @ready="playerReadied"></video-player>
+                   </el-dialog>
+                   <div style="padding: 14px;">
+                       <div class="bottom clearfix"></div>
+                   </div>
+               </el-card>
+           </el-col>
+       </el-row>
 
-     <el-row>
-         <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
-     </el-row>
-     <el-row type="flex" class="row-bg" justify="space-around">
-         <el-col :xs="22" :sm="20" :md="10" :lg="6" v-for="(o, index) in 3" :offset="index > 0 ? 3 : 0">
-             <el-card :body-style="{ padding: '0px' }">
-                 <img src="http://www.51gpc.com/Public/img/logo-new.png" class="image"  @click="openVideo = true">
-                 <el-dialog title="收货地址" v-model="openVideo" @close="playerReadied">
-                     <video-player  ref="videoPlayer" style="width:100%;" :options="playerOptions"  @pause="onPlayerPlay"  @ready="playerReadied"></video-player>
-                 </el-dialog>
-                 <div style="padding: 14px;">
-                     <div class="bottom clearfix"></div>
-                 </div>
-             </el-card>
-         </el-col>
-    </el-row>
+       <el-row>
+           <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
+       </el-row>
+       <el-row type="flex" class="row-bg" justify="space-around">
+           <el-col :xs="22" :sm="20" :md="10" :lg="6" v-for="(o, index) in 3" :offset="index > 0 ? 3 : 0">
+               <el-card :body-style="{ padding: '0px' }">
+                   <img src="http://www.51gpc.com/Public/img/logo-new.png" class="image"  @click="openVideo = true">
+                   <el-dialog title="收货地址" v-model="openVideo" @close="playerReadied">
+                       <video-player  ref="videoPlayer" style="width:100%;" :options="playerOptions"  @pause="onPlayerPlay"  @ready="playerReadied"></video-player>
+                   </el-dialog>
+                   <div style="padding: 14px;">
+                       <div class="bottom clearfix"></div>
+                   </div>
+               </el-card>
+           </el-col>
+      </el-row>
+    </div>
+   
      <!-- 新闻模块   -->
-     <el-row>
+     <div class="news-list">
+           <el-row>
          <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
      </el-row>
      <el-row>
@@ -55,11 +54,13 @@
              <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
          </el-breadcrumb>
      </el-row>
+     </div>
  </div>
 </template>
 <script>
  import VideoPlayer from 'vue-video-player'
-  import {getData,getUrl} from '../../api/api';
+ import {getData,getUrl} from '../../api/api';
+ import Swiper from '../views/Swiper.vue';
  
     export default{
         data (){
@@ -83,23 +84,26 @@
                   }
             };
         },
+        components: {
+             Swiper,
+        },
         methods: {
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
             },
-            getCarousel(){
-                let that = this;
-               getUrl({}).then(function (response) {
-                  console.log("ml");
-                    console.log(response);
-                    let data = response.data;
-                      that.carouselImgList = data.img;
-                      console.log(data.img);
+            // getCarousel(){
+            //     let that = this;
+            //    getUrl({}).then(function (response) {
+            //       console.log("ml");
+            //         console.log(response);
+            //         let data = response.data;
+            //           that.carouselImgList = data.img;
+            //           console.log(data.img);
 
-                }).catch(function (error) {
-                    console.log(error);
-                })
-            },
+            //     }).catch(function (error) {
+            //         console.log(error);
+            //     })
+            // },
            onPlayerPlay(player) {
                   console.log('player play!', player)
             },
@@ -112,7 +116,7 @@
         },
         mounted() {
             console.log("mounted")
-            this.getCarousel();
+            // this.getCarousel();
         },
         computed: {
               player() {

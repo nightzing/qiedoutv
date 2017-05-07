@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div>
         <el-row>
           <el-col :span="8">
             <div class="grid-content bg-purple">
@@ -13,61 +13,68 @@
           </el-col>
           <el-col :span="16"><div class="grid-content bg-purple-light">拍片咨询：40000</div></el-col>
         </el-row>
-        <el-menu theme="dark" default-active="1" class="el-menu-demo" router mode="horizontal" @select="handleSelect">
-        <el-menu-item class="" default-active="" default-openeds="" index="index">首页</el-menu-item>
-        <el-menu-item index="model" v-popover:popover1>制作流程
-                <el-popover
-                  ref="popover1"
+
+        <el-menu theme="dark" default-active="1" class="el-menu-demo" router="" mode="horizontal">
+          <el-menu-item class="is-active" default-active="" default-openeds="" index="index">首页</el-menu-item>
+          <el-menu-item index="process" v-popover:popover1>制作流程
+              <el-popover
+                ref="popover1"
+                placement="bottom"
+                title="制作流程"
+                width="500"
+                trigger="hover"
+                content="">
+                  <p>拍摄意向需求沟通</p>
+                  <p>确立拍摄类型、文案创意策划</p>
+                  <p>摄制组搭建、拍摄</p>
+                  <p>后期制作</p>
+                  <p>审片修改</p>
+                  <p>成果交付</p>
+              </el-popover>
+          </el-menu-item>
+          <el-menu-item index="type" v-popover:popover2>作品类型
+               <el-popover
+                  ref="popover2"
                   placement="bottom"
                   title="制作流程"
                   width="500"
                   trigger="hover"
                   content="">
-                </el-popover>
-        </el-menu-item>
-            <el-menu-item index="rule">作品类型</el-menu-item>
-        <!--     <el-menu-item index="rule">关于我们</el-menu-item>
-            <el-menu-item index="rule">加入茄豆</el-menu-item> -->
 
-            <!-- <el-menu-item index="model">模型管理</el-menu-item>
-            <el-menu-item index="rule">规则管理</el-menu-item>
-            <el-menu-item index="vari">变量管理</el-menu-item> -->
+                      
+                      
+
+                    <p>产品展示片</p>
+                    <p>产品宣传片</p>
+                    <p>品牌宣传片</p>
+                    <p>微电影：爱情MV、亲情MV
+                               高端个人形象宣传片</p>
+                </el-popover>
+          </el-menu-item>
+          <el-menu-item index="about">关于茄豆</el-menu-item>
         </el-menu>
         
         <div class="content">
             <router-view></router-view>
         </div>
+
+        <!--footer-->
+       <Footer></Footer>
     </div>
 </template>
 
 <script>
-  import {getData} from '../api/api';
+  import Footer from './Footer.vue'
+  import {getData} from '../api/api'
     export default{
-        data (){
-            return {
-                 list:[],
-            };
+        components: {
+             Footer,
         },
-         methods: {
-            handleSelect(key, keyPath) {
-                console.log(key, keyPath);
-            },
-            getData(){
-                let self = this
-               getData({}).then(function (response) {
-                  console.log("ml");
-                    console.log(response);
-                    self.list = response.data.tags;
-                     console.log(self.list);
+        watch: {
 
-                }).catch(function (error) {
-                    console.log(error);
-                })
-            }
         },
-        mounted() {
-            console.log("mounted")
-            this.getData();
+        methods: {
+
         }
     }
 </script>

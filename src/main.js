@@ -6,12 +6,12 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import routes from './routes'
 import VideoPlayer from 'vue-video-player'
-
-
+import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.use(VideoPlayer)
+Vue.use(VueAwesomeSwiper)
 
 const router = new VueRouter({
     routes
