@@ -10,6 +10,20 @@
       "src":"http://www.51gpc.com/uploads/2016-12-26/5860d03ac70d7.jpg"
     }
   ],
+  "video": [
+     {
+      "poster":"https://surmon-china.github.io/vue-video-player/static/images/author.jpg",
+      "src":"http://www.51gpc.com/uploads/2016-12-26/5860d01f80d22.jpg"
+     },
+    {
+      "poster":"https://surmon-china.github.io/vue-video-player/static/images/author.jpg",
+      "src":"http://www.51gpc.com/uploads/2016-12-26/5860d01f80d22.jpg"
+    },
+    {
+      "poster":"https://surmon-china.github.io/vue-video-player/static/images/author.jpg",
+      "src":"http://www.51gpc.com/uploads/2016-12-26/5860d01f80d22.jpg"
+    }
+  ],
   "models": [
     {
       "id": 1,

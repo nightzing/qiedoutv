@@ -1,59 +1,66 @@
 <template>
     <div>
-        <el-row>
-          <el-col :span="8">
-            <div class="grid-content bg-purple">
-                  <el-card class="box-card" style="height:80px;">
-                    <img src="http://www.51gpc.com/Public/img/logo-new.png" class="image">
-                    <div style="padding: 14px;">
-                            <span>好吃的汉堡</span>
-                    </div>
-                  </el-card>
-            </div>
-          </el-col>
-          <el-col :span="16"><div class="grid-content bg-purple-light">拍片咨询：40000</div></el-col>
+        <el-row :gutter="20">
+
+            <el-col :span="10">
+                <div class="grid-content">
+                    <el-row :gutter="10" type="flex" class="row-bg"  align="middle">
+                        <el-col  :lg="12">
+                            <img src="http://placehold.it/217x60" class="image">
+                        </el-col>
+                        <el-col :lg="12">
+                             <span> 好吃的汉堡</span>
+                        </el-col>
+                    </el-row>
+                </div>
+            </el-col>
+
+
+            <el-col :span="10">
+                <div class="grid-content bg-purple-light">拍片咨询：40000</div>
+            </el-col>
+
         </el-row>
 
-        <el-menu theme="dark" default-active="1" class="el-menu-demo" router="" mode="horizontal">
-          <el-menu-item class="is-active" default-active="" default-openeds="" index="index">首页</el-menu-item>
-          <el-menu-item index="process" v-popover:popover1>制作流程
-              <el-popover
-                ref="popover1"
-                placement="bottom"
-                title="制作流程"
-                width="500"
-                trigger="hover"
-                content="">
-                  <p>拍摄意向需求沟通</p>
-                  <p>确立拍摄类型、文案创意策划</p>
-                  <p>摄制组搭建、拍摄</p>
-                  <p>后期制作</p>
-                  <p>审片修改</p>
-                  <p>成果交付</p>
-              </el-popover>
-          </el-menu-item>
-          <el-menu-item index="type" v-popover:popover2>作品类型
-               <el-popover
-                  ref="popover2"
-                  placement="bottom"
-                  title="制作流程"
-                  width="500"
-                  trigger="hover"
-                  content="">
-
-                      
-                      
-
-                    <p>产品展示片</p>
-                    <p>产品宣传片</p>
-                    <p>品牌宣传片</p>
-                    <p>微电影：爱情MV、亲情MV
-                               高端个人形象宣传片</p>
-                </el-popover>
-          </el-menu-item>
-          <el-menu-item index="about">关于茄豆</el-menu-item>
-        </el-menu>
-        
+        <el-row>
+            <el-col  :lg="20">
+                <el-menu theme="dark" default-active="1" class="el-menu-demo" router="" mode="horizontal">
+                    <el-menu-item class="is-active" default-active="" default-openeds="" index="index">首页</el-menu-item>
+                    <el-menu-item index="process" v-popover:popover1>制作流程
+                        <el-popover
+                                ref="popover1"
+                                placement="bottom"
+                                title="制作流程"
+                                width="100%"
+                                trigger="hover"
+                                content="100%">
+                            <p>拍摄意向需求沟通</p>
+                            <p>确立拍摄类型、文案创意策划</p>
+                            <p>摄制组搭建、拍摄</p>
+                            <p>后期制作</p>
+                            <p>审片修改</p>
+                            <p>成果交付</p>
+                        </el-popover>
+                    </el-menu-item>
+                    <el-menu-item index="type" v-popover:popover2>作品类型
+                        <el-popover
+                                ref="popover2"
+                                placement="bottom"
+                                title="制作流程"
+                                width="100%"
+                                trigger="hover"
+                                content="">
+                            <p>产品展示片</p>
+                            <p>产品宣传片</p>
+                            <p>品牌宣传片</p>
+                            <p>微电影：爱情MV、亲情MV
+                                高端个人形象宣传片</p>
+                        </el-popover>
+                    </el-menu-item>
+                    <el-menu-item index="about">关于茄豆</el-menu-item>
+                </el-menu>
+            </el-col>
+        </el-row>
         <div class="content">
             <router-view></router-view>
         </div>

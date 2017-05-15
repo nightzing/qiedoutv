@@ -19,10 +19,20 @@ module.exports = (options = {}) => ({
     publicPath: options.dev ? '/assets/' : publicPath
   },
   module: {
-    rules: [{
+    rules: [
+    {
         test: /\.vue$/,
         use: ['vue-loader']
       },
+     // {
+     //     test: /\.vue$/,
+     //     loader: 'vue-loader',
+     //     options: {
+     //       loaders: {
+     //         'scss': 'style-loader!css-loader!sass-loader'
+     //       }
+     //     }
+     //  },
       {
         test: /\.js$/,
         use: ['babel-loader'],
@@ -76,9 +86,9 @@ module.exports = (options = {}) => ({
   ],
   resolve: {
     alias: {
-        vue: 'vue/dist/vue.js',
+       'vue': 'vue/dist/vue.js',
         '~': resolve(__dirname, 'src')
-    }
+    },
   },
   devServer: {
     host: '127.0.0.1',

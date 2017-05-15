@@ -40,19 +40,35 @@
    
      <!-- 新闻模块   -->
      <div class="news-list">
-           <el-row>
-         <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
-     </el-row>
-     <el-row>
-         <el-breadcrumb separator="/">
-             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-         </el-breadcrumb>
-         <el-breadcrumb separator="/">
-             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-         </el-breadcrumb>
-         <el-breadcrumb separator="/">
-             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-         </el-breadcrumb>
+        <el-row>
+           <el-col :span="24"><div class="grid-content">资讯</div></el-col>
+        </el-row>
+        <el-row type="flex" class="row-bg" justify="space-around">
+          <el-col :span="8">
+              <el-breadcrumb separator="/">
+                  <el-breadcrumb-item :to="{ path: '/' }">广告宣传片拍摄要义</el-breadcrumb-item>
+              </el-breadcrumb>
+              <el-breadcrumb separator="/">
+                  <el-breadcrumb-item :to="{ path: '/' }">广告宣传片拍摄要义啊看手机丢了饭卡结束代理反馈</el-breadcrumb-item>
+              </el-breadcrumb>
+              <el-breadcrumb separator="/">
+                  <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+              </el-breadcrumb>
+          </el-col>
+          <el-col :span="8">
+              <el-breadcrumb separator="/">
+                  <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+              </el-breadcrumb>
+              <el-breadcrumb separator="/">
+                  <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+              </el-breadcrumb>
+              <el-breadcrumb separator="/">
+                  <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+              </el-breadcrumb>
+          </el-col>
+        </el-row>
+        <el-row>
+         
      </el-row>
      </div>
  </div>
