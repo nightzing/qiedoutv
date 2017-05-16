@@ -61,18 +61,3 @@ npm run build
 
 
 
-### 模拟测试数据 
-
-``````
-安装 [json-server](https://github.com/typicode/json-server) 
-
-npm install -g json-server
-启动server:
-json-server -p 8011 -w data.json
-http://localhost:8011/models?_start=1&_limit=10
-http://localhost:8011/models?ModId=1
-
-example: 
-http://www.betterpixels.co.uk/projects/2015/05/09/mock-up-your-rest-api-with-json-server/
-
-``````
