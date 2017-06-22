@@ -9,20 +9,20 @@
 		                	    <span class="partners">联系方式</span>
 		                    </el-col>
 	                	    <el-col :span="8">
-								<i class="el-icon-share"></i>	
-								 400  800  0000	
+								<Icon type="ios-telephone-outline"></Icon>
+								 电话:400  800  0000
 		                    </el-col>
 	                	</el-row>
 	                	<el-row type="flex" class="row-bg" justify="center" align="middle">
 	                	    <el-col :span="8">
-		                	   <i class="el-icon-share"></i>	
-								en698324 黄黄
+								&nbsp;&nbsp;<Icon type="android-contact"></Icon>
+								微信:en698324(黄黄)
 		                    </el-col>
 	                	</el-row>
 	                	<el-row type="flex" class="row-bg" justify="center" align="middle">
 	                	    <el-col :span="8">
-		                	   <i class="el-icon-share"></i>	
-								 500206488 大猫	
+								&nbsp;&nbsp;<Icon type="android-contact"></Icon>
+								 QQ:500206488(大猫)
 		                    </el-col>
 	                	</el-row>
 					</div>
@@ -83,8 +83,11 @@
 	.container{
 		text-align:center;
 		font-size:14px;
+		background-color: #434c53;
+	  	color:#b0b6b8;
+
 	}
-	.about-us{ background-color: #f9fafc;}
+	.about-us{ }
 	  .el-col {
 	    border-radius: 4px;
 	  }
@@ -103,7 +106,6 @@
 	    padding: 10px 0;
 	  }
 	  .copyright{
-	  	background-color: #434c53;
-	  	color:#b0b6b8;
+
 	  }
 </style>

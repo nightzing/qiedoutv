@@ -1,134 +1,82 @@
 <template>
-<section class="rulesty">
-    <div class="tool">
-    <!--工具条-->
-            <el-col :span="24" class="toolbar">
-                <el-form :inline="true" :model="filters">
-                    <el-form-item>
-                        <el-input v-model="filter" placeholder="规则ID"></el-input>
-                    </el-form-item>
-                    <el-form-item>
-                        <el-button type="primary" v-on:click="searchRule">查询</el-button>
-                    </el-form-item>
-                    <el-form-item>
-                        <el-button type="primary" @click="handleAdd">新增</el-button>
-                    </el-form-item>
-                </el-form>
-            </el-col>
+    <section class="videoList">
+        <Row :gutter="26" >
+            <Col span="24" style="padding:1% 2%">
+                <div>视频列表</div>
+            </Col>
+        </Row>
+        <Row>
+          <Col :xs="{ span: 11, offset: 1 }" :lg="{ span: 7, offset: 1 }" v-for="(o, index) in videos">
+          <Card style="width:100%;">
+            <div>
+              <img style="width:100%;" :src="o.cover" class="image"  @click="showVideo(o)">
+              <Row>
+                <Col span="16" style="text-align:left;">{{o.name}}</Col>
+                <Col span="8"  style="text-align:right;">￥{{o.price}}</Col>
+              </Row>
             </div>
-    
-        <el-table
-		 :data="rules"
-                   border
-                   style="width: 100%"
-                   highlight-current-row
-                   >
-               <el-table-column
-				   fixed
-                   prop="RuleID"
-                   label="规则ID"
-                   width="150">
-               </el-table-column>
-			   <el-table-column
-				   prop ="RuleType"
-				   label = "规则类型"
-				   width="150">
-				</el-table-column>
-				<el-table-column
-				   prop ="Status"
-				   label = "状态"
-				   width="150"
-				   :formatter="formatter">
-				</el-table-column>
-				<el-table-column
-				   prop ="RuleDesc"
-				   label = "描述"
-				   width="250">
-				</el-table-column>
-				<el-table-column
-				   prop ="RuleContext"
-				   label = "内容"
-				   width="500">
-				</el-table-column>
-				<el-table-column
-                       fixed="right"
-                       label="操作"
-                       inline-template :context="_self"
-                       width="200">
-                   <span>
-                       <el-button
-                               @click.native.prevent="handleEdit(row)"
-                               type="text"
-                               size="small">
-                           编辑
-                       </el-button>
-                       <el-button
-                               @click.native.prevent="deleteRow(row)"
-                               type="text"
-                               size="small">
-                           移除
-                       </el-button>
-				    </span>
-               </el-table-column>
-		</el-table>
-		<!--编辑界面-->
-        <el-dialog :title="editFormTile" v-model="editFormVisible" :close-on-click-modal="false">
-            <el-form :model="editForm" label-width="120px" :rules="editFormRules" ref="editForm">
-                <el-form-item label="规则ID" prop="RuleID">
-                    <el-input v-model="editForm.RuleID" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="规则类型" prop="RuleType">
-                    <el-input v-model="editForm.RuleType" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="状态">
-                    <el-input-number v-model="editForm.Status" :min="0" :max="200"></el-input-number>
-                </el-form-item>
-                <el-form-item label="内容">
-                    <el-input v-model="editForm.RuleContext" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="描述">
-                    <el-input type="textarea" :rows="4" v-model="editForm.RuleDesc"></el-input>
-                </el-form-item>
-            </el-form>
-            <div slot="footer" class="dialog-footer">
-                <el-button @click.native="editFormVisible = false">取 消</el-button>
-                <el-button type="primary" @click.native="editSubmit" :loading="editLoading">{{btnEditText}}</el-button>
-            </div>
-        </el-dialog>
-   </section>
+          </Card>
+          </Col>
+        </Row>
+
+      <el-dialog title="视频" v-model="openVideo" @close="playerReadied">
+        <video-player v-if="openVideo"  ref="videoPlayer" style="width:100%;height:100%;" :options="playerOptions"  @pause="onPlayerPlay"  @ready="playerReadied"></video-player>
+        <Row>
+          <Col span="16" style="text-align:left;">{{videos[0].name}}</Col>
+          <Col span="8"  style="text-align:right;">1200</Col>
+        </Row>
+      </el-dialog>
+    </section>
 </template>
 
 <script type="text/ecmascript-6">
-	import { getRules,editRule,deleteRule,addRule,searchRuleByRuleID} from '../../api/api';
+	import { getRules,editRule,deleteRule,addRule,searchRuleByRuleID, getVideoType } from '../../api/api';
+    import VideoPlayer from 'vue-video-player';
+
 	export  default {
 		data(){
 		return{
-                rules:[],
-                filters: {
-                    name: ''
+		  videos: [{}],
+            openVideo : false,
+            playerOptions: {
+                // component options
+                start: 0,
+                playsinline: false,
+                // videojs options
+                muted: true,
+                language: 'en',
+                autoplay: true,
+                playbackRates: [0.7, 1.0, 1.5, 2.0],
+                sources: [{}],
+                poster: "http://placehold.it/900x400",
                 },
-				ruleStatus:['无效','有效'],
-				filter:'',
-                editFormVisible:false,
-                editFormTile: '编辑',//编辑界面标题
-                //编辑界面数据
-                editForm: {
-                    id: null,
-					"RuleID": '',
-					"RuleType": '',
-					"RuleContext": '',
-					"Status": '',
-					"RuleDesc": ''
-                },
-                editLoading: false,
-                btnEditText: '提 交',
-                editFormRules: {
-                    
-                }
             };
 		},
 		
 		methods:{
+		  fetchData () {
+		    let type = this.$route.query.type
+        getVideoType(type).then(res => {
+          console.log(res.data.data)
+          this.videos = res.data.data
+          console.log(this.videos)
+        })
+		    console.log(this.$route.query.type)
+      },
+      showVideo (video) {
+        console.log(this.playerOptions)
+        this.playerOptions.sources[0] = {type: 'video/mp4', src: video.url}
+        this.openVideo = true
+      },
+      playerReadied(player) {
+        player.pause();
+      },
+      onPlayerPlay(player) {
+        console.log('player play!', player)
+      },
+      onPlayerPause(player) {
+        player.pause();
+      },
 			formatter(row, column) {
 				let idx = parseInt(row.Status);
 				//console.log('idx is '+idx + this.ruleStatus[idx]);
@@ -260,7 +208,8 @@
 			
 		},
 		mounted(){
-				this.getRules();
+//				this.getRules();
+				this.fetchData();
 				}
 	}
 </script>

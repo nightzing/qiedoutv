@@ -1,87 +1,124 @@
 <template>
  <div >
    <Swiper></Swiper>
+
      <!-- 视频模块 -->
     <div class="video-list">
-      <el-row>
-           <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
-       </el-row>
-       <el-row type="flex" class="row-bg" justify="space-around">
-           <el-col :xs="12" :sm="20" :md="10" :lg="6" v-for="(o, index) in 3" :offset="index > 0 ? 3 : 0">
-               <el-card :body-style="{ padding: '0px' }" >
-                   <img src="http://www.51gpc.com/Public/img/logo-new.png" class="image"  @click="openVideo = true">
-                   <el-dialog title="收货地址" v-model="openVideo" @close="playerReadied">
-                       <video-player  ref="videoPlayer" style="width:100%;" :options="playerOptions"  @pause="onPlayerPlay"  @ready="playerReadied"></video-player>
-                   </el-dialog>
-                   <div style="padding: 14px;">
-                       <div class="bottom clearfix"></div>
-                   </div>
-               </el-card>
-           </el-col>
-       </el-row>
+        <el-row class="video-select" :gutter="10" type="flex"  justify="space-around" align="">
 
-       <el-row>
-           <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
-       </el-row>
-       <el-row type="flex" class="row-bg" justify="space-around">
-           <el-col :xs="22" :sm="20" :md="10" :lg="6" v-for="(o, index) in 3" :offset="index > 0 ? 3 : 0">
-               <el-card :body-style="{ padding: '0px' }">
-                   <img src="http://www.51gpc.com/Public/img/logo-new.png" class="image"  @click="openVideo = true">
-                   <el-dialog title="收货地址" v-model="openVideo" @close="playerReadied">
-                       <video-player  ref="videoPlayer" style="width:100%;" :options="playerOptions"  @pause="onPlayerPlay"  @ready="playerReadied"></video-player>
-                   </el-dialog>
-                   <div style="padding: 14px;">
-                       <div class="bottom clearfix"></div>
-                   </div>
-               </el-card>
-           </el-col>
-      </el-row>
+            <!-- 视频选择列表 -->
+            <el-col span="8" >
+                <el-row  :gutter="10" type="flex"  justify="space-around"  :body-style="{}"  style="padding-top: 10%;">
+                    <el-col span="18">
+                        <el-select v-model="value" placeholder="请选择视频类型" style="width:100%;">
+                            <router-link to="/type?type=advertise" class="">
+                                <el-option value="advertise">品牌视频</el-option>
+                            </router-link>
+                            <router-link to="/type?type=product" class="">
+                                <el-option value="production">产品视频 </el-option>
+                            </router-link>
+                        </el-select>
+                        <div style="text-align:right;">
+                            <Button type="info" style="width:50%;">微电影</Button>
+                        </div>
+                    </el-col>
+                </el-row>
+                <el-row  :gutter="10" type="flex"  justify="space-around" :body-style="{ }" style="padding-top: 20%;">
+                    <el-col span="18">
+                        <el-row  :gutter="10" type="flex"  justify="space-around" :body-style="{}">
+                            <el-col :span="8">
+                                <Card style="width:100%;">
+                                    <div style="text-align:center">
+                                        <Icon type="ios-pricetags-outline" size="40"></Icon>
+                                        <p>透明价格</p>
+                                    </div>
+                                </Card>
+                            </el-col>
+                            <el-col :span="8">
+                                <Card style="width:100%;">
+                                    <div style="text-align:center">
+                                        <Icon type="ios-pricetags-outline" size="40"></Icon>
+                                        <p>免费创意</p>
+                                    </div>
+                                </Card>
+                            </el-col>
+                            <el-col :span="8">
+                                <Card style="width:100%;">
+                                    <div style="text-align:center">
+                                        <Icon type="ios-film-outline" size="40"></Icon>
+                                        <p>后续推广</p>
+                                    </div>
+                                </Card>
+                            </el-col>
+                        </el-row>
+                    </el-col>
+                </el-row>
+            </el-col>
+
+            <!-- 视频播放列表 -->
+            <el-col span="16">
+                <el-card :body-style="{ padding: '0px'}" >
+                    <img :src="videos[0].cover"  style="width:100%;height:100%;" class="image"  @click="showVideo(videos[0])">
+
+                </el-card>
+            </el-col>
+        </el-row>
+
+        <Row>
+            <Col :xs="{ span: 11, offset: 1 }" :lg="{ span: 7, offset: 1 }" v-for="(o, index) in videos" v-if="index !== 0">
+                <Card style="width:100%;">
+                    <div>
+                        <img style="width:100%;" :src="o.cover" class="image"  @click="showVideo(o)">
+                        <Row>
+                            <Col span="16" style="text-align:left;">{{o.name}}</Col>
+                            <Col span="8"  style="text-align:right;">￥{{o.price}}</Col>
+                        </Row>
+                    </div>
+                </Card>
+            </Col>
+        </Row>
     </div>
+   <el-dialog title="视频" v-model="openVideo" @close="playerReadied">
+     <video-player v-if="openVideo"  ref="videoPlayer" style="width:100%;height:100%;" :options="playerOptions"  @pause="onPlayerPlay"  @ready="playerReadied"></video-player>
+     <Row>
+       <Col span="16" style="text-align:left;">{{videos[0].name}}</Col>
+       <Col span="8"  style="text-align:right;">1200</Col>
+     </Row>
+   </el-dialog>
    
      <!-- 新闻模块   -->
      <div class="news-list">
-        <el-row>
-           <el-col :span="24"><div class="grid-content">资讯</div></el-col>
-        </el-row>
+         <Row :gutter="26" >
+             <Col span="24" style="padding:1% 2%">
+                 <div>新闻资讯</div>
+             </Col>
+         </Row>
         <el-row type="flex" class="row-bg" justify="space-around">
           <el-col :span="8">
-              <el-breadcrumb separator="/">
-                  <el-breadcrumb-item :to="{ path: '/' }">广告宣传片拍摄要义</el-breadcrumb-item>
-              </el-breadcrumb>
-              <el-breadcrumb separator="/">
-                  <el-breadcrumb-item :to="{ path: '/' }">广告宣传片拍摄要义啊看手机丢了饭卡结束代理反馈</el-breadcrumb-item>
-              </el-breadcrumb>
-              <el-breadcrumb separator="/">
-                  <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-              </el-breadcrumb>
-          </el-col>
-          <el-col :span="8">
-              <el-breadcrumb separator="/">
-                  <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-              </el-breadcrumb>
-              <el-breadcrumb separator="/">
-                  <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-              </el-breadcrumb>
-              <el-breadcrumb separator="/">
-                  <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-              </el-breadcrumb>
+              <router-link to="/type" class="">
+                      <span class="news-item">1111111111广告宣传片拍摄要义</span>
+              </router-link>
           </el-col>
         </el-row>
         <el-row>
-         
      </el-row>
      </div>
  </div>
 </template>
 <script>
- import VideoPlayer from 'vue-video-player'
- import {getData,getUrl} from '../../api/api';
+ import VideoPlayer from 'vue-video-player';
+ import {getVideo} from '../../api/api';
  import Swiper from '../views/Swiper.vue';
+ import VideoList  from '../commonLayout/VideoList.vue';
  
     export default{
         data (){
             return {
-                 carouselImgList:[],
+              videos: [{}],
+                 fristVideoList : {
+                    cover:"",
+                    name:"",
+                 },
                  openVideo : false,
                  playerOptions: {
                         // component options
@@ -92,34 +129,42 @@
                         language: 'en',
                         autoplay: true,
                         playbackRates: [0.7, 1.0, 1.5, 2.0],
-                        sources: [{
-                          type: "video/mp4",
-                          src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm"
+                        sources: [],
+                  },
+                   options: [{
+                          value: '选项1',
+                          label: '品牌视频'
+                        }, {
+                          value: '选项2',
+                          label: '产品视频'
                         }],
-                        poster: "https://surmon-china.github.io/vue-video-player/static/images/author.jpg",
-                  }
+                        value: '',
+
             };
         },
         components: {
              Swiper,
+             VideoList
         },
         methods: {
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
             },
-            // getCarousel(){
-            //     let that = this;
-            //    getUrl({}).then(function (response) {
-            //       console.log("ml");
-            //         console.log(response);
-            //         let data = response.data;
-            //           that.carouselImgList = data.img;
-            //           console.log(data.img);
-
-            //     }).catch(function (error) {
-            //         console.log(error);
-            //     })
-            // },
+            getData(){
+                getVideo({}).then((response) => {
+                   console.log(response.data.data)
+                  console.log(this.playerOptions)
+                  this.videos = response.data.data.data
+//                  console.log(this.playerOptions.length)
+                 }).catch(function (error) {
+                    console.log(error);
+                 })
+             },
+          showVideo (video) {
+              console.log(this.playerOptions)
+              this.playerOptions.sources[0] = {type: 'video/mp4', src: video.url}
+            this.openVideo = true
+          },
            onPlayerPlay(player) {
                   console.log('player play!', player)
             },
@@ -132,7 +177,8 @@
         },
         mounted() {
             console.log("mounted")
-            // this.getCarousel();
+          console.log(this.playerOptions)
+            this.getData();
         },
         computed: {
               player() {
@@ -191,7 +237,10 @@
        .row-bg {
          padding: 10px 0;
          background-color: #f9fafc;
+         flex-wrap:wrap;
        }
-       .el-breadcrumb{padding:5px;text-align:center;}
+       .news-item{color:#97a8be;}
+       .video-list{padding:0 20px 20px 20px ;}
+       .video-select{text-align:center;}
 
 </style>

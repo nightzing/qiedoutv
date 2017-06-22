@@ -8,8 +8,8 @@
 	       <swiper-slide style="background-image:url(http://cdn.gousa.cn/sites/default/files/styles/original_with_watermark/public/snoqualmie_pass_0.jpg)"></swiper-slide>
 	       <swiper-slide style="background-image:url(http://cdn.gousa.cn/sites/default/files/styles/original_with_watermark/public/three_sisters_wilderness_0.jpg)"></swiper-slide>
 	       <div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
-	       <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
-	       <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
+	       <div class="swiper-button-prev swiper-button-white" slot="button-prev" ></div>
+	       <div class="swiper-button-next swiper-button-white" slot="button-next" style="right:5%;"></div>
 	     </swiper>
 	   </div>
 </template>
@@ -32,7 +32,15 @@
 
 <style scoped>
 	.swiper-slide {
-    background-position: center;
-    background-size: cover;
+		background-position: center;
+		background-size: cover;
   }
+  .swiper-button-prev{
+  		left:5% !important;
+  }
+   .swiper-button-next{
+  		right:5% !important;
+  }
+
+
 </style>

@@ -3,7 +3,7 @@ import Index from './components/index/Index.vue'
 import Process from './components/process/Process.vue'
 import Type from './components/type/Type.vue'
 import About from './components/about/About.vue'
-
+import VideoList from './components/commonLayout/VideoList.vue'
 const routes = [
     {
         path: '/',
@@ -30,6 +30,12 @@ const routes = [
             , {
                 path: '/about',
                 component: About,
+                name: '',
+                hidden: false
+            },
+             {
+                path: '/commonLayout',
+                component:  VideoList,
                 name: '',
                 hidden: false
             },

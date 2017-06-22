@@ -8,7 +8,11 @@ import routes from './routes'
 import VideoPlayer from 'vue-video-player'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 
+import iView from 'iview';
+import 'iview/dist/styles/iview.css';    // 使用 CSS
+
 Vue.use(ElementUI)
+Vue.use(iView)
 Vue.use(VueRouter)
 Vue.use(VideoPlayer)
 Vue.use(VueAwesomeSwiper)
@@ -25,3 +29,5 @@ var vue = new Vue({
 });
 
 console.log(vue);
+
+

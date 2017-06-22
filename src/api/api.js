@@ -1,10 +1,17 @@
 import axios from 'axios'
 
 // let base = 'http://127.0.0.1:8010/api'
+let base = 'http://api.qiedoutv.com'
 
-export const getData = params => { return axios.get(`https://api.douban.com/v2/book/1220562`, { params: params }); };
+export const getBanner = params => { return axios.get(`${base}/banner/all`, { params: params }); };
 
-export const getUrl = params => { return axios.get(`../static/mock/data.json`, { params: params }); };
+export const getVideo = params => { return axios.get(`${base}/video/all`, { params: params }); };
+
+export const getVideoType = type => { return axios.get(`${base}/video/${type}`); };
+
+// export const getData = params => { return axios.get(`https://api.douban.com/v2/book/1220562`, { params: params }); };
+
+// export const getUrl = params => { return axios.get(`../static/mock/data.json`, { params: params }); };
 
 
 
@@ -12,7 +19,6 @@ export const getUrl = params => { return axios.get(`../static/mock/data.json`, {
 
 
 //model的增删改查
-// export const getModels = params => { return axios.get(`${base}/models`, { params: params }); };
 
 // export const removeModel= params => {
 //     let id = params['id'];
